@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="challan_and_bill_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0"
+              rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true"
+              uuid="e87f9148-134a-41a7-aed2-655c1e09493f">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="branch_id" class="java.lang.Integer">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="office_copy" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[SELECT
+DATE_FORMAT(s.sale_date,"%d/%m/%y")sale_date,br.name,br.address branch_address,
+cu.customer_name,cu.address customer_address,cu.mobile_no,
+c.company_name,i.item_name,
+b.bill_no,DATE_FORMAT(b.billing_date,"%d/%m/%y")billing_date,
+s.total_sale_amount,
+s.sale_amount,b.total_payable_amount,s.sale_unit_price,
+b.previous_due_amount,
+b.total_amount,
+b.paid_amount,s.drum_or_cartoon,s.sale_drum_no,
+b.new_due_amount new_due
+FROM item i,sale s, bill b, salesperson sp,company c ,customer cu,branch br
+WHERE i.item_id=s.item_id AND s.bill_id=b.bill_id AND sp.salesperson_id=s.salesperson_id AND b.branch_id=br.id AND b.customer_id=cu.customer_id AND b.company_id=c.company_id and b.bill_id=$P{branch_id}]]>
+    </queryString>
+    <field name="sale_date" class="java.lang.String"/>
+    <field name="name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="branch_address" class="java.lang.String"/>
+    <field name="customer_name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="customer_address" class="java.lang.String"/>
+    <field name="mobile_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="company_name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="item_name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="bill_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="billing_date" class="java.lang.String"/>
+    <field name="total_sale_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="sale_amount" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="total_payable_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="sale_unit_price" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="previous_due_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="total_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="paid_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="drum_or_cartoon" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="sale_drum_no" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="new_due" class="java.lang.Double"/>
+    <variable name="sale_amount_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+        <variableExpression><![CDATA[$F{sale_amount}]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <pageHeader>
+        <band height="59" splitType="Stretch">
+            <textField>
+                <reportElement x="21" y="19" width="366" height="14" uuid="0e0f4ddb-ecf7-460e-b3c7-a9b90acc6a6b"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer_name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="21" y="34" width="366" height="12" uuid="3cee925a-ad44-457d-9a7d-20e1ad484d9a"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{customer_address}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="21" y="47" width="247" height="12" uuid="4b32d240-752f-4d55-83cb-5f8c756e4e9d"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Mobile No : "+$F{mobile_no}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="409" y="33" width="118" height="14" uuid="9154f78a-69c8-4641-9585-5ef970ad1322"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Challan No : "+$F{bill_no}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="409" y="19" width="118" height="14" uuid="9f3cefb4-24a6-437a-bd08-5d66a2dfb434"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Date : "+$F{billing_date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="209" y="0" width="178" height="20" uuid="9e728358-c3d1-4eb5-b83d-9c2464ee10f1"/>
+                <box>
+                    <topPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Challan (Customer Copy )]]></text>
+            </staticText>
+            <line>
+                <reportElement x="9" y="-5" width="538" height="1" uuid="99ba5290-f0c1-4cec-abcf-8f0385858583"/>
+            </line>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="20" splitType="Stretch">
+            <staticText>
+                <reportElement x="348" y="0" width="139" height="20" uuid="40e86667-848b-461a-881e-c2dc0953613b"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Quantity]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="109" y="0" width="239" height="20" uuid="34dee669-ae64-4512-a5ae-784899cdfb17"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Description Of Goods]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="65" y="0" width="44" height="20" uuid="cc3ab7d8-f175-41a7-b373-e14e6763db81"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[SL]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="348" y="0" width="139" height="20"
+                               uuid="b52199da-8b5e-4660-b2f4-9e189f471914"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA[$F{sale_amount}+" kgs / "+$F{sale_drum_no}+" "+$F{drum_or_cartoon}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="109" y="0" width="239" height="20"
+                               uuid="fb31cd57-de5f-473d-9343-8c844a4ecae9"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{item_name}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="65" y="0" width="44" height="20"
+                               uuid="060ccb47-f245-4053-b2f0-918f0205c3ba"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="83" splitType="Stretch">
+            <staticText>
+                <reportElement x="109" y="0" width="239" height="20" uuid="ae7ad663-921c-407a-8230-c4eb1fe1551b"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Total Quantity]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="65" y="0" width="44" height="20" uuid="8a57bfca-867f-4cba-9fc5-f5ef53cf5a56"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="348" y="0" width="139" height="20" uuid="7c55963c-5e01-45ae-b5e5-e75838c7aba1"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{sale_amount_1}+" kgs"]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+</jasperReport>

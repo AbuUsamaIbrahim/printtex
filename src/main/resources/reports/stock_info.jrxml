@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="stock_info" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="b16d3e3f-bb6e-416f-a7bb-79b2a506da5f">
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="branch_id" class="java.lang.Long">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="branch_name" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[SELECT SUM(isb.sales_amount)sales_amount, i.item_amount current_amount,i.item_name,c.category_name
+FROM item i,item_sale_branch isb,category c
+WHERE i.item_id=isb.item_id AND i.category_id=c.category_id AND ($P{branch_id} is null or isb.branch_id=$P{branch_id})
+GROUP BY i.item_amount,i.item_name,c.category_name order by i.item_name asc]]>
+    </queryString>
+    <field name="sales_amount" class="java.math.BigDecimal"/>
+    <field name="current_amount" class="java.lang.Integer"/>
+    <field name="item_name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="category_name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <variable name="current_amount_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+        <variableExpression><![CDATA[$F{current_amount}]]></variableExpression>
+    </variable>
+    <variable name="sales_amount_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+        <variableExpression><![CDATA[$F{sales_amount}]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="28" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="28" uuid="6fcf7e13-04d6-485e-8966-ab78e1753d27"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Stock Info]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="23" width="555" height="1" uuid="513e71b4-dba9-4ece-8a39-4c3d81e0a128"/>
+            </line>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="23">
+            <textField>
+                <reportElement x="0" y="0" width="232" height="23" uuid="cf15146a-dc54-466a-b5ee-d775f6dbd190"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Branch Name : "+$P{branch_name}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="20" splitType="Stretch">
+            <staticText>
+                <reportElement x="232" y="0" width="98" height="20" uuid="80ff00bc-d600-43c0-8a5b-ba0a1a9b581e"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Total Quantity (kgs)]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="32" y="0" width="100" height="20" uuid="6d2b33c3-bc4f-49f2-8c14-920f0e2f17e1"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Item Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="132" y="0" width="100" height="20" uuid="aae54c80-f0be-4df0-a2f0-85d87c34b7d4"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Category Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="330" y="0" width="125" height="20" uuid="1ac3a6e0-2767-487c-87f1-2f330ea28703"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Remaining Quantity (kgs)]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="455" y="0" width="100" height="20" uuid="72c65be3-8107-4052-a340-d075a008b993"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Sold Quantity (kgs)]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="0" width="32" height="20" uuid="633aad0c-7342-4d5e-8c57-aedd350ff973"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[SL.No.]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="232" y="0" width="98" height="20"
+                               uuid="ec7f064b-2e87-4078-a725-1b7b03fa20bf"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[$F{current_amount}+Integer.valueOf($F{sales_amount}.intValue())]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="32" y="0" width="100" height="20"
+                               uuid="f692f2e9-1627-495c-8cbc-cf7f785858b2"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{item_name}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="132" y="0" width="100" height="20"
+                               uuid="38b15e1f-eebf-4121-a7a2-54674619c426"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{category_name}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="330" y="0" width="125" height="20"
+                               uuid="daa68669-8842-421d-9128-e03b0d7a342c"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{current_amount}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="455" y="0" width="100" height="20"
+                               uuid="12d887af-b761-402a-bda3-bd9358430649"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{sales_amount}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="32" height="20"
+                               uuid="fc7dc0a1-0549-4fc8-9e9c-eb45a6585903"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="232" y="0" width="98" height="20" uuid="c13b19f0-3c49-47a8-a306-081860ed6e2d"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[$V{current_amount_1}+Integer.valueOf($V{sales_amount_1}.intValue())]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="455" y="0" width="100" height="20" uuid="954bf0ba-9172-4a42-a427-2be1624240a9"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{sales_amount_1}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="330" y="0" width="125" height="20" uuid="b8a36bde-5fbb-4d58-b1ce-09415682df99"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{current_amount_1}]]></textFieldExpression>
+            </textField>
+        </band>
+    </columnFooter>
+</jasperReport>

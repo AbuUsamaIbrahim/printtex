@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html ng-app="angHomeApp" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Print Tex|Bill and Challan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/bootstrap.min-3.3.7.js"></script>
+    <script src="/theme_js/hoe.js"></script>
+    <script type="text/javascript">
+        function home() {
+            window.location.href = "/admin/home";
+        };
+    </script>
+
+    <link rel="stylesheet" href="/css/loading-bar.css">
+    <link rel="stylesheet" href="/css/hotkeys.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/bootstrap/font-awesome.min.css"/>
+    <link href="/images/pos_favicon.png" rel="icon">
+    <link rel="stylesheet" href="/theme_css/hoe.css"/>
+    <style>
+        @page {
+            size: 7in 9.25in;
+            margin: 0mm 0mm 0mm 0mm;
+        }
+
+        div#chapter1, div#chapter2 {
+
+            page-break-after: always;
+        }
+
+        @media print {
+
+
+            .no-print, .no-print * {
+                display: none !important;
+            }
+        }
+
+        .line {
+            width: 180px;
+            border-bottom: 1px solid black;
+            position: absolute;
+        }
+
+        .line1 {
+            width: 220px;
+            border-bottom: 1px solid black;
+            position: absolute;
+        }
+
+        .line2 {
+            width: 85%;
+            border-bottom: 1px solid black;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div class="no-print">
+    <div id="hoeapp-wrapper" class="hoe-hide-lpanel tdn" hoe-device-type="desktop">
+        <header id="hoe-header" hoe-lpanel-effect="shrink"> <!-- Main Header -->
+            <div class="hoe-left-header" hoe-position-type="fixed">
+                <a class="pull-left" href="#"><img onclick="home()" src="/images/pos.png" width="45" height="45"
+                                                   alt="Logo"/>
+                    <span>Printtex</span></a>
+                <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+            </div>
+            <div class="hoe-right-header" hoe-position-type="fixed">
+                <span class="hoe-sidebar-toggle"><a href="#"></a></span>  <!-- toggle menu -->
+                <ul class="left-navbar">
+                    <li class="hoe-rheader-submenu">
+                        <a href="#"><i style="font-size:22px" onclick="home()" class="fa fa-home hand"
+                                       aria-hidden="true"></i> </a>
+                    </li>
+
+                </ul>
+                <ul class="right-navbar"> <!-- Right User Information -->
+                    <li class="dropdown hoe-rheader-submenu hoe-header-profile">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span><img class="img-circle" src="/images/user.png"></span>
+                            <span>  <i class=" fa fa-angle-down"></i></span>
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li><a href='/logout'><i class="fa fa-power-off"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div style="height: 3px; margin-top:48px;
+                         background:white;"></div>
+            </div>
+        </header>
+        <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+            <aside id="hoe-left-panel" hoe-position-type="fixed">
+                <div class="profile-box">
+                    <div class="media">
+                        <a class="pull-left" href="user-profile.html">
+                            <img class="img-circle" src="/images/user.png"/>
+                        </a>
+                        <div class="media-body">
+                            <h5 class="media-heading">Welcome <br> <span th:utext="${userName}"></span></h5>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav panel-list">
+                    <!--                        <li class="nav-level">Navigation</li>-->
+                    <li class="active">
+                        <a href="/admin/item/stock">
+                            <i class="fa fa-tachometer"></i>
+                            <span class="menu-text">Stock Management</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="hoe-has-menu">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-money"></i>
+                            <span class="menu-text">Sale</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+                            <li>
+                                <a href="/admin/sale">
+                                    <span class="menu-text"> Sale Management </span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/allcustomer/due">
+                                    <span class="menu-text"> Paid Previous Due </span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="hoe-has-menu">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-files-o"></i>
+                            <span class="menu-text">Reports</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+                            <li>
+                                <a href="/admin/report/today">
+                                    <span class="menu-text"> Today's Sale</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/report/total">
+                                    <span class="menu-text"> Total Sale</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/report/by_date">
+                                    <span class="menu-text"> Report By Date</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/report/by_customer">
+                                    <span class="menu-text"> Report By Customer</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/report/by_salesperson">
+                                    <span class="menu-text"> Report By Salesperson</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="hoe-has-menu">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-cogs"></i>
+                            <span class="menu-text">Setup</span>
+                            <span class="selected"></span>
+                        </a>
+                        <ul class="hoe-sub-menu">
+                            <li>
+                                <a href="/admin/addcompany">
+                                    <span class="menu-text"> Add Company </span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/addcustomer">
+                                    <span class="menu-text"> Add Customer </span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/addsalesperson">
+                                    <span class="menu-text"> Add Salesperson </span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/addcategory">
+                                    <span class="menu-text"> Create Category</span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/additem">
+                                    <span class="menu-text"> Create Item </span>
+                                    <span class="selected"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+
+        </div>
+    </div>
+</div>
+
+<div id="chapter2" style="width: 310mm;height: 297mm;position: relative;" class="container">
+
+    <div class="form-group">
+        <center>
+            <h2 class="centre"><img src="/images/control/printtexgroup.png" alt="logo" th:width="200" th:height="100"/>
+                <center><h2>Print Tex Group</h2></center>
+                <center><h5 th:text="${companyAddress}"></h5></center>
+            </h2>
+        </center>
+    </div>
+    <div style="float: left" class="form-group">
+        <h3 style="font-weight: bold" th:text="${customerName}"></h3>
+        <p th:text="${customerAddress}"></p>
+    </div>
+    <div style="margin-left: 800px" class="form-group">
+        <h5 th:text="'Date: '+${date}"></h5>
+    </div>
+    <h2 style="margin-left: 400px">Bill (Office Copy)</h2>
+
+    <hr>
+    <center><p th:inline="text">[[${result}]]</p></center>
+
+    <div style="white-space: pre-line" class="form-group">
+        <table style="margin-left: 300px">
+            <tr>
+                <td><h4>Previous Due: </h4></td>
+                <td th:text="${previousDue}"></td>
+            </tr>
+            <tr>
+                <td><h4>Paid Due: </h4></td>
+                <td th:text="${paidDueAmount}"></td>
+            </tr>
+
+            <tr>
+                <td><h4>New Due: </h4></td>
+                <td th:text="${newDue}"></td>
+            </tr>
+            <tr>
+                <td><h4>Return Amount: </h4></td>
+                <td th:text="${return}"></td>
+            </tr>
+        </table>
+    </div>
+    <div style="position: absolute; bottom: 0;">
+        <div style="float: left">
+            <div class="line">
+
+            </div>
+            <div>
+                <p>Buyer's Authorized Signature</p>
+            </div>
+        </div>
+        <div style="margin-left: 700px">
+            <div class="line1">
+
+            </div>
+            <div>
+                <p th:inline="text">For Print Tex Group</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+<div id="chapter1" style="width: 310mm;height: 297mm;position: relative" class="container">
+    <div class="form-group">
+        <center>
+            <h2 class="centre"><img src="/images/control/printtexgroup.png" alt="logo" th:width="200" th:height="100"/>
+                <center><h2>Print Tex Group</h2></center>
+                <center><h5 th:text="${companyAddress}"></h5></center>
+            </h2>
+        </center>
+    </div>
+
+    <div style="float: left" class="form-group">
+        <h3 style="font-weight: bold" th:text="${customerName}"></h3>
+        <p th:text="${customerAddress}"></p>
+    </div>
+    <div style="margin-left: 800px" class="form-group">
+        <h5 th:text="'Date: '+${date}"></h5>
+    </div>
+    <h2 style="margin-left: 400px">Bill (Customer Copy)</h2>
+
+    <hr>
+    <center><p th:inline="text">[[${result}]]</p></center>
+
+    <div style="white-space: pre-line" class="form-group">
+        <table style="margin-left: 300px">
+            <tr>
+                <td><h4>Previous Due: </h4></td>
+                <td th:text="${previousDue}"></td>
+            </tr>
+            <tr>
+                <td><h4>Paid Due: </h4></td>
+                <td th:text="${paidDueAmount}"></td>
+            </tr>
+
+            <tr>
+                <td><h4>New Due: </h4></td>
+                <td th:text="${newDue}"></td>
+            </tr>
+            <tr>
+                <td><h4>Return Amount: </h4></td>
+                <td th:text="${return}"></td>
+            </tr>
+        </table>
+    </div>
+    <div style="position: absolute; bottom: 0;">
+        <div style="float: left">
+            <div class="line">
+
+            </div>
+            <div>
+                <p>Buyer's Authorized Signature</p>
+            </div>
+        </div>
+        <div style="margin-left: 700px">
+            <div class="line1">
+
+            </div>
+            <div>
+                <p th:inline="text">For Print Tex Group</p>
+            </div>
+        </div>
+        <div class="no-print">
+            <input type="button" class="btn btn-primary btn-success pull-right"
+                   onClick="window.print()"
+                   value="Print"/>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="/kha/custom.css"/>
+
+
+</body>
+</html>

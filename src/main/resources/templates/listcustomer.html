@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html ng-app="angHomeApp"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Print Tex|Customer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/bootstrap.min-3.3.7.js"></script>
+    <script src="/theme_js/hoe.js"></script>
+    <script type="text/javascript">
+        function home() {
+            window.location.href = "/admin/home";
+        };
+    </script>
+    <link rel="stylesheet" href="/css/loading-bar.css">
+    <link rel="stylesheet" href="/css/hotkeys.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/bootstrap/font-awesome.min.css"/>
+    <link href="/images/pos_favicon.png" rel="icon">
+    <link rel="stylesheet" href="/theme_css/hoe.css"/>
+
+</head>
+
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div style="background-color:white" id="hoeapp-wrapper" class="hoe-hide-lpanel tdn" hoe-device-type="desktop">
+    <header id="hoe-header" hoe-lpanel-effect="shrink">
+        <div class="hoe-left-header" hoe-position-type="fixed">
+            <a class="pull-left" href="#"><img onclick="home()" src="/images/pos.png" width="45" height="45"
+                                               alt="Logo"/>
+                <span>Printtex</span></a>
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+        </div>
+        <div class="hoe-right-header" hoe-position-type="fixed">
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+            <ul class="left-navbar">
+                <li class="hoe-rheader-submenu">
+                    <a href="#"><i style="font-size:22px" onclick="home()" class="fa fa-home hand"
+                                   aria-hidden="true"></i> </a>
+                </li>
+
+            </ul>
+            <ul class="right-navbar">
+                <li class="dropdown hoe-rheader-submenu hoe-header-profile">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span><img class="img-circle" src="/images/user.png"></span>
+                        <span>  <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu ">
+                        <li><a href='/logout'><i class="fa fa-power-off"></i>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div style="height: 3px; margin-top:48px;
+                         background:white;"></div>
+        </div>
+    </header>
+    <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+        <aside id="hoe-left-panel" hoe-position-type="fixed">
+            <div class="profile-box">
+                <div class="media">
+                    <a class="pull-left" href="user-profile.html">
+                        <img class="img-circle" src="/images/user.png"/>
+                    </a>
+                    <div class="media-body">
+                        <h5 class="media-heading">Welcome <br> <span th:utext="${userName}"></span></h5>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav panel-list">
+                <li class="active">
+                    <a href="/admin/item/stock">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="menu-text">Stock Management</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="hoe-has-menu">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-money"></i>
+                        <span class="menu-text">Sale</span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="hoe-sub-menu">
+                        <li>
+                            <a href="/admin/sale">
+                                <span class="menu-text"> Sale Management </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/allcustomer/due">
+                                <span class="menu-text"> Paid Previous Due </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="hoe-has-menu">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-files-o"></i>
+                        <span class="menu-text">Reports</span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="hoe-sub-menu">
+                        <li>
+                            <a href="/admin/report/today">
+                                <span class="menu-text"> Today's Sale</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/report/total">
+                                <span class="menu-text"> Total Sale</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/report/by_date">
+                                <span class="menu-text"> Report By Date</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/report/by_customer">
+                                <span class="menu-text"> Report By Customer</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/report/by_salesperson">
+                                <span class="menu-text"> Report By Salesperson</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hoe-has-menu">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-cogs"></i>
+                        <span class="menu-text">Setup</span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="hoe-sub-menu">
+                        <li>
+                            <a href="/admin/addcompany">
+                                <span class="menu-text"> Add Company </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/addcustomer">
+                                <span class="menu-text"> Add Customer </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/addsalesperson">
+                                <span class="menu-text"> Add Salesperson </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/addcategory">
+                                <span class="menu-text"> Create Category</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/additem">
+                                <span class="menu-text"> Create Item </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+
+        <div class="container">
+            <div class="form-group">
+                <center><h2 class="centre" style="margin-left: 300px;">All Customers<a th:href="@{/admin/addcustomer}"
+                                                                                       style="margin-left:300px "
+                                                                                       class="btn btn-primary">Add
+                    More</a></h2></center>
+
+            </div>
+            <hr>
+            <center><p th:inline="text">[[${result}]]</p></center>
+            <div th:if="${not #lists.isEmpty(customers)}">
+                <table class="display table table-bordered table-striped table-hover">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Contact No</th>
+                        <th>Address</th>
+                        <th>Due (Taka)</th>
+                        <th>Previous Bill no</th>
+                        <th>Action</th>
+
+                    </tr>
+                    <tr th:each="customer,iterator : ${customers}">
+                        <td th:text="${iterator.index + 1}"></td>
+                        <td th:text="${customer.customerName}"></td>
+                        <td th:text="${customer.mobileNo}"></td>
+                        <td th:text="${customer.address}"></td>
+                        <td th:text="${customer.previousDueAmount}"></td>
+                        <td th:text="${customer.customerPreviousBillNo}"></td>
+                        <td><a th:href="@{'/admin/customer/edit/id/'+${customer.id}}" class="btn btn-success">Edit</a><a
+                                th:href="@{'/admin/customer/delete/id/'+${customer.id}}"
+                                onclick="return confirm('Are you sure to delete this customer?')"
+                                class="btn btn-danger">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="/kha/custom.css"/>
+
+
+</body>
+</html>

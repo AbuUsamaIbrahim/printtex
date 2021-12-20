@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="challan_and_bill" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20"
+              rightMargin="20" topMargin="20" bottomMargin="20" uuid="8bf2cf41-7883-454d-b8b3-8ea8d65fddde">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression>
+            <![CDATA["D:\\Project\\printtex\\src\\main\\resources\\reports\\"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="branch_id" class="java.lang.Integer">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="amount_in_words" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="logo_image" class="java.lang.String"/>
+    <parameter name="company_name_image" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[select br.address branch_address,br.name,c.company_name from bill b,branch br,company c where b.branch_id=br.id AND b.company_id=c.company_id and b.bill_id=$P{branch_id}]]>
+    </queryString>
+    <field name="branch_address" class="java.lang.String"/>
+    <field name="name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="company_name" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <group name="page3" isStartNewPage="true">
+        <groupHeader>
+            <band height="659">
+                <subreport>
+                    <reportElement x="0" y="0" width="555" height="659" uuid="881f7d86-cf45-4a4f-95fb-24cb442b6261"/>
+                    <subreportParameter name="amount_in_words">
+                        <subreportParameterExpression><![CDATA[$P{amount_in_words}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="branch_id">
+                        <subreportParameterExpression><![CDATA[$P{branch_id}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    <subreportExpression>
+                        <![CDATA[$P{SUBREPORT_DIR}+File.separator + "challan_subreport1_office_copy.jasper"]]></subreportExpression>
+                </subreport>
+                <staticText>
+                    <reportElement x="22" y="639" width="141" height="20" uuid="f26457c7-0e30-44d6-b4b2-8d94d8a89c33"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[Buyer's Authorizes Signature]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="275" y="639" width="271" height="20" uuid="68c00f7f-e631-46a4-9acd-c02dfc93bf15"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA["For "+$F{company_name}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    <group name="page4" isStartNewPage="true">
+        <groupHeader>
+            <band height="659">
+                <staticText>
+                    <reportElement x="12" y="634" width="141" height="20" uuid="8d7d90bc-7ddd-4d11-90a8-d6b0d2370c9a"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[Buyer's Authorizes Signature]]></text>
+                </staticText>
+                <subreport>
+                    <reportElement x="0" y="0" width="555" height="659" uuid="9dd1afdb-fbc2-4b1e-8a10-218267501229"/>
+                    <subreportParameter name="amount_in_words">
+                        <subreportParameterExpression><![CDATA[$P{amount_in_words}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="branch_id">
+                        <subreportParameterExpression><![CDATA[$P{branch_id}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    <subreportExpression>
+                        <![CDATA[$P{SUBREPORT_DIR} + "challan_subreport1_customer_copy.jasper"]]></subreportExpression>
+                </subreport>
+                <textField>
+                    <reportElement x="275" y="634" width="260" height="20" uuid="7f9f234d-791c-4634-ac02-77d613635487"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA["For "+$F{company_name}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    <group name="page1" isStartNewPage="true">
+        <groupHeader>
+            <band height="659">
+                <subreport>
+                    <reportElement x="0" y="0" width="555" height="659" uuid="ef7b54dd-96e3-40ac-b933-4d28b0b9aa10"/>
+                    <subreportParameter name="amount_in_words">
+                        <subreportParameterExpression><![CDATA[$P{amount_in_words}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="branch_id">
+                        <subreportParameterExpression><![CDATA[$P{branch_id}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    <subreportExpression>
+                        <![CDATA[$P{SUBREPORT_DIR}+File.separator + "challan_and_bill_subreport1.jasper"]]></subreportExpression>
+                </subreport>
+                <staticText>
+                    <reportElement x="12" y="637" width="141" height="20" uuid="c1d9ca6e-9712-4b00-b865-b6943afea824"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[Buyer's Authorizes Signature]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="275" y="637" width="260" height="20" uuid="9e801823-202b-48bb-82d4-60fa9bce7cb1"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA["For "+$F{company_name}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+    </group>
+    <group name="page2" isStartNewPage="true">
+        <groupHeader>
+            <band height="659">
+                <staticText>
+                    <reportElement x="12" y="639" width="141" height="20" uuid="2455e764-6d01-4866-929a-ff78e97eb917"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <text><![CDATA[Buyer's Authorizes Signature]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="275" y="639" width="271" height="20" uuid="0c5d234f-e074-4135-b827-68b920da7cf6"/>
+                    <box>
+                        <topPen lineWidth="0.5"/>
+                    </box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA["For "+$F{company_name}]]></textFieldExpression>
+                </textField>
+                <subreport>
+                    <reportElement x="0" y="0" width="555" height="659" uuid="9056efda-6b1d-43d2-8900-f00b1a136196"/>
+                    <subreportParameter name="amount_in_words">
+                        <subreportParameterExpression><![CDATA[$P{amount_in_words}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <subreportParameter name="branch_id">
+                        <subreportParameterExpression><![CDATA[$P{branch_id}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    <subreportExpression>
+                        <![CDATA[$P{SUBREPORT_DIR}+File.separator + "challan_and_bill_subreport1_customer_copy.jasper"]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupHeader>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <pageHeader>
+        <band height="93">
+            <image>
+                <reportElement x="71" y="0" width="80" height="62" uuid="c0d00954-32e9-49fa-85ce-c35c69d789ae"/>
+                <imageExpression><![CDATA[$P{logo_image}]]></imageExpression>
+            </image>
+            <textField isBlankWhenNull="true">
+                <reportElement x="22" y="56" width="524" height="37" uuid="99560d56-a0ea-409c-ba82-d7ccc00b0e3d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[]]></textFieldExpression>
+            </textField>
+            <image>
+                <reportElement x="153" y="4" width="393" height="55" uuid="68b137b8-4801-4b96-bd03-bab65e374c3d"/>
+                <imageExpression><![CDATA[$P{company_name_image}]]></imageExpression>
+            </image>
+        </band>
+    </pageHeader>
+    <pageFooter>
+        <band height="50">
+            <staticText>
+                <reportElement x="22" y="0" width="534" height="31" uuid="df9e10eb-9690-4d54-85a7-009edfa8c56e"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Head Office : 16/B, Ashek Jamadar Lane, Islampur, Dhaka-1100, Bangladesh.
+Phone: +88-02-57393664, Fax: +88-02-57394832
+E-mail: print.tex.bd@gmail.com, www.ptg-bd.com]]></text>
+            </staticText>
+        </band>
+    </pageFooter>
+</jasperReport>

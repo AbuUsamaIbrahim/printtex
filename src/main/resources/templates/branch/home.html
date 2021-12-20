@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html ng-app="angHomeApp" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Print Tex | Home</title>
+    <script src="/bootstrap/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/bootstrap.min-3.3.7.js"></script>
+    <script src="/theme_js/hoe.js"></script>
+    <script type="text/javascript">
+        function home() {
+            window.location.href = "/branch/home";
+        };
+    </script>
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: green;
+            color: white;
+            text-align: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/css/loading-bar.css">
+    <link rel="stylesheet" href="/css/hotkeys.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/bootstrap/font-awesome.min.css"/>
+    <link href="/images/pos_favicon.png" rel="icon">
+    <!--theme-->
+    <link rel="stylesheet" href="/theme_css/hoe.css"/>
+
+</head>
+
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div style="background-color:white" id="hoeapp-wrapper" class="hoe-hide-lpanel tdn" hoe-device-type="desktop">
+    <header th:replace="fragments/page_header :: header"></header>
+    <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+        <aside id="hoe-left-panel" hoe-position-type="fixed">
+            <div class="profile-box">
+                <div class="media">
+                    <a class="pull-left" href="user-profile.html">
+                        <img class="img-circle" src="/images/user.png"/>
+                    </a>
+                    <div class="media-body">
+                        <h5 class="media-heading">Welcome <br> <span th:utext="${userName}"></span></h5>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav panel-list">
+                <!--                        <li class="nav-level">Navigation</li>-->
+                <li class="active">
+                    <a href="/branch/stock/view">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="menu-text">Stock Management</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="hoe-has-menu">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-money"></i>
+                        <span class="menu-text">Sale</span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="hoe-sub-menu">
+                        <li>
+                            <a href="/branch/sale">
+                                <span class="menu-text"> Sale Management </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/branch/allcustomer/due">
+                                <span class="menu-text"> Paid Previous Due </span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="hoe-has-menu">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-files-o"></i>
+                        <span class="menu-text">Reports</span>
+                        <span class="selected"></span>
+                    </a>
+                    <ul class="hoe-sub-menu">
+                        <li>
+                            <a href="/admin/report/today">
+                                <span class="menu-text"> Today's Sale</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/report/total">
+                                <span class="menu-text"> Total Sale</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/report/by_date">
+                                <span class="menu-text"> Report By Date</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/report/by_customer">
+                                <span class="menu-text"> Report By Customer</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/report/by_salesperson">
+                                <span class="menu-text"> Report By Salesperson</span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </aside>
+
+
+        <div class="inner-content">
+            <div ui-view="content">
+                <!-- Angular views -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-success">
+                            <!--<div class="panel-heading-kha">Create Product</div>-->
+                            <div class="panel-body">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8">
+                                            <a href="/branch/stock/view">
+                                                <div class="btn1">
+                                                    <img src="/images/control/stock-icon.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Stock Info</b></h5>
+                                                </div>
+                                            </a>
+                                            <a href="/branch/sale">
+                                                <div class="btn1">
+                                                    <img src="/images/product/cp.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Sale Management</b></h5>
+                                                </div>
+                                            </a>
+                                            <span id="add_item">
+                                                <a href="/branch/allitem">
+                                                <div class="btn1">
+                                                    <img src="/images/control/additem.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>All Items</b></h5>
+                                                </div>
+                                            </a>
+                                            </span>
+                                            <span id="list_category">
+                                                  <a href="/branch/allcategory">
+                                                <div class="btn1">
+                                                    <img src="/images/control/list.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>All Category</b></h5>
+                                                </div>
+                                            </a>
+                                            </span>
+                                            <span id="add_customer">
+                                                <a href="/branch/addcustomer">
+                                                <div class="btn1">
+                                                    <img src="/images/control/customer.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Add Customer</b></h5>
+                                                </div>
+                                            </a>
+                                            </span>
+                                            <span id="add_company">
+                                                 <a href="/branch/allcompany">
+                                                <div class="btn1">
+                                                    <img src="/images/control/printtexgroup.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>All Company</b></h5>
+                                                </div>
+                                            </a>
+                                            </span>
+                                            <span id="add_salesPerson">
+                                                <a href="/branch/addsalesperson">
+                                                <div class="btn1">
+                                                    <img src="/images/control/salespersonlogo.png" width="50"
+                                                         height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Add Salesperson</b></h5>
+                                                </div>
+                                            </a>
+                                           </span>
+                                            <a href="/branch/allcustomer/due">
+                                                <div class="btn1">
+                                                    <img src="/images/control/payment_due.jpg" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Paid Previous Due</b></h5>
+                                                </div>
+                                            </a>
+                                            <a href="/branch/bills">
+                                                <div class="btn1">
+                                                    <img src="/images/control/bill.png" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Bill Status</b></h5>
+                                                </div>
+                                            </a>
+                                            <a href="/branch/reports">
+                                                <div class="btn1">
+                                                    <img src="/images/control/reportImage.jpg" width="50" height="50"
+                                                         alt="Logo"/>
+                                                    <h5><b>Reports</b></h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                        <div ng-controller="AppController"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p align="center">Developed By, Pacific Soft-Tech Ltd.</p>
+    <p align="center">All Rights Reserved and Copyright © 2018 by Pacific Soft-Tech Ltd.</p>
+    <p align="center">Web: <a href="http://www.pacificsoft-tech.com" style="color:red">www.pacificsoft-tech.com</a></p>
+</div>
+
+<link rel="stylesheet" href="/kha/custom.css"/>
+
+
+</body>
+</html>

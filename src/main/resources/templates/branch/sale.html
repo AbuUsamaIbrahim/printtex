@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html ng-app="angHomeApp" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Print Tex| Item</title>
+    <script src="/bootstrap/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/bootstrap.min-3.3.7.js"></script>
+    <script src="/theme_js/hoe.js"></script>
+    <script type="text/javascript">
+        function home() {
+            window.location.href = "/branch/home";
+        };
+    </script>
+    <link rel="stylesheet" href="/css/loading-bar.css">
+    <link rel="stylesheet" href="/css/hotkeys.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/bootstrap/font-awesome.min.css"/>
+    <link href="/images/pos_favicon.png" rel="icon">
+    <link rel="stylesheet" href="/theme_css/hoe.css"/>
+
+</head>
+
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div style="background-color:white" id="hoeapp-wrapper" class="hoe-hide-lpanel tdn" hoe-device-type="desktop">
+    <header id="hoe-header" hoe-lpanel-effect="shrink">
+        <div class="hoe-left-header" hoe-position-type="fixed">
+            <a class="pull-left" href="#"><img onclick="home()" src="/images/pos.png" width="45" height="45"
+                                               alt="Logo"/>
+                <span>POS V-2.0</span></a>
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+        </div>
+        <div class="hoe-right-header" hoe-position-type="fixed">
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+            <ul class="left-navbar">
+                <li class="hoe-rheader-submenu">
+                    <a href="#"><i style="font-size:22px" onclick="home()" class="fa fa-home hand"
+                                   aria-hidden="true"></i> </a>
+                </li>
+
+            </ul>
+            <ul class="right-navbar">
+                <li class="dropdown hoe-rheader-submenu hoe-header-profile">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span><img class="img-circle" src="/images/user.png"></span>
+                        <span>  <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu ">
+                        <li><a href='/logout'><i class="fa fa-power-off"></i>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div style="height: 3px; margin-top:48px;
+                         background:#8fff9c;"></div>
+        </div>
+    </header>
+    <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+        <aside th:replace="fragments/branch_aside_extended :: aside"></aside>
+
+        <div class="container">
+            <div class="form-group">
+                <center><h2 class="centre" style="margin-right: 40px;">Sale Information</h2></center>
+            </div>
+
+            <hr>
+            <center><p th:inline="text">[[${result}]]</p></center>
+            <form class="form-horizontal" action="#" th:action="@{/admin/sale}" th:object="${sale}" method="post">
+                <div class="form-group">
+                    <label style="font-weight: bold " class="control-label col-sm-3">Company :</label>
+                    <div th:if="${#lists.isEmpty(saleList)}" class="col-sm-5">
+                        <select class="form-control" th:field="*{company.companyId}">
+                            <option value="0">----Select Company----</option>
+                            <option th:each="company : ${companies}" th:value="${company.companyId}"
+                                    th:text="${company.companyName}"></option>
+                        </select>
+
+                    </div>
+                    <div th:if="${not #lists.isEmpty(saleList)}" class="col-sm-5">
+                        <input type="text" th:field="*{company.companyId}" class="form-control" id="company.companyId"
+                               placeholder="Enter Amount in kg" name="saleAmount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold " class="control-label col-sm-3">Customer :</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" th:field="*{customer.id}">
+                            <option th:if="${#lists.isEmpty(saleList)}" value="0">----Select Customer----</option>
+                            <option th:each="customer : ${customers}" th:value="${customer.id}"
+                                    th:text="${customer.customerName}"></option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold " class="control-label col-sm-3">Salesperson :</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" th:field="*{salesperson.id}">
+                            <option th:if="${#lists.isEmpty(saleList)}" value="0">----Select Salesperson----</option>
+                            <option th:each="salesperson : ${salespersons}" th:value="${salesperson.id}"
+                                    th:text="${salesperson.salespersonName}"></option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold " class="control-label col-sm-3">Item :</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" th:field="*{item.itemId}">
+                            <option th:if="${#lists.isEmpty(saleList)}" value="0">----Select Item----</option>
+                            <option th:each="item : ${items}" th:value="${item.itemId}"
+                                    th:text="${item.itemName}"></option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: bold " class="control-label col-sm-3" for="saleNo">Sale No:</label>
+                    <div class="col-sm-5">
+                        <input type="text" th:field="*{saleNo}" class="form-control" id="saleNo"
+                               placeholder="Enter Sale no" name="saleNo">
+                        <p th:inline="text">[[${previousSaleNo}]]</p>
+                        <label th:if="${#fields.hasErrors('saleNo')}" th:errors="*{saleNo}"> Sale No Error</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="saleUnitPrice">Sale Unit Price:</label>
+                    <div class="col-sm-5">
+                        <input type="number" th:field="*{saleUnitPrice}" class="form-control" id="saleUnitPrice"
+                               placeholder="Enter Sale Unit Price"
+                               name="saleUnitPrice">
+                        <label th:if="${#fields.hasErrors('saleUnitPrice')}" th:errors="*{saleUnitPrice}">Sale Unit
+                            price Error</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="saleAmount">Amount:</label>
+                    <div class="col-sm-5">
+                        <input type="number" th:field="*{saleAmount}" class="form-control" id="saleAmount"
+                               placeholder="Enter Amount in kg" name="saleAmount">
+                        <label th:if="${#fields.hasErrors('saleAmount')}" th:errors="*{saleAmount}">Amount Error</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <input type="number" hidden="hidden" th:field="*{saleDrumNo}" class="form-control"
+                               id="saleDrumNo" placeholder="Enter Drum no" name="saleDrumNo" value="1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <a th:if="${not #lists.isEmpty(saleList)}" href="/admin/addMoreSale"
+                           class="btn btn-primary btn-success pull-right">Add More Sale</a>
+                        <a th:if="${not #lists.isEmpty(saleList)}" href="/admin/billandchalan"
+                           class="btn btn-primary btn-success pull-right">Proceed to Bill and Challan</a>
+                        <button class="btn btn-danger pull-right" type="reset">Reset</button>
+                        <button type="submit" class="btn btn-primary btn-success pull-right">Sale</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="/kha/custom.css"/>
+</body>
+</html>

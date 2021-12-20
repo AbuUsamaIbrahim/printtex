@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="angHomeApp" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head_part :: head"></head>
+
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div style="background-color:white" id="hoeapp-wrapper" class="hoe-hide-lpanel tdn" hoe-device-type="desktop">
+    <header id="hoe-header" hoe-lpanel-effect="shrink">
+        <div class="hoe-left-header" hoe-position-type="fixed">
+            <a class="pull-left" href="#"><img onclick="home()" src="/images/pos.png" width="45" height="45"
+                                               alt="Logo"/>
+                <span>Printtex</span></a>
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+        </div>
+        <div class="hoe-right-header" hoe-position-type="fixed">
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+            <ul class="left-navbar">
+                <li class="hoe-rheader-submenu">
+                    <a href="#"><i style="font-size:22px" onclick="home()" class="fa fa-home hand"
+                                   aria-hidden="true"></i> </a>
+                </li>
+
+            </ul>
+            <ul class="right-navbar">
+                <li class="dropdown hoe-rheader-submenu hoe-header-profile">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span><img class="img-circle" src="/images/user.png"></span>
+                        <span>  <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu ">
+                        <li><a href='/logout'><i class="fa fa-power-off"></i>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div style="height: 3px; margin-top:48px;
+                         background:white;"></div>
+        </div>
+    </header>
+    <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+        <aside th:replace="fragments/aside_extended :: aside"></aside>
+
+
+        <div class="container">
+            <div class="form-group">
+                <center><h2 class="centre" style="margin-right: 40px;">Payment Information</h2></center>
+            </div>
+
+            <hr>
+            <center><p th:inline="text">[[${result}]]</p></center>
+            <div style="white-space: pre-line" class="form-group">
+                <table style="font-weight: bold;margin-left: 178px">
+                    <tr>
+                        <td>Payable Amount:</td>
+                        <td th:text="${total}"></td>
+                    </tr>
+                    <tr>
+                        <td>Previous Due:</td>
+                        <td th:text="${previousDue}"></td>
+                    </tr>
+                    <tr>
+                        <td style="margin-right: 200px">Total Payable Amount:</td>
+                        <td th:text="${totalWithDue}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <form class="form-horizontal" action="#" th:action="@{/admin/bill}" th:object="${payment}" method="post">
+                <div class="form-group">
+                    <label style="margin-top: 20px" class="control-label col-sm-3" for="paidPayment">Paid
+                        Amount:</label><br>
+                    <div class="col-sm-5">
+                        <input type="number" th:field="*{paidPayment}" class="form-control" id="paidPayment"
+                               placeholder="Enter Paid amount" name="paidPayment">
+                        <label th:if="${#fields.hasErrors('paidPayment')}" th:errors="*{paidPayment}"> Paid
+                            Error</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="margin-top: 20px" class="control-label col-sm-3" for="paidPayment">Payment
+                        Date:</label><br>
+                    <div class="col-sm-5">
+                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" th:field="*{paymentDate}"
+                               class="form-control" id="paymentDate"
+                               placeholder="Enter Payment Date" name="paymentDate">
+                        <label th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}"> Payment Date
+                            Error</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <button type="submit" class="btn btn-primary btn-success pull-right">Generate Bill & Challan
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<link rel="stylesheet" href="/kha/custom.css"/>
+<script>
+    (document).ready(function () {
+        $('#paymentDate').datepicker({dateFormat: "dd/mm/yyyy"})
+    })
+</script>
+</body>
+</html>

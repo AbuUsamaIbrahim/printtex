@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="angHomeApp" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Print Tex|Company</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/bootstrap.min-3.3.7.js"></script>
+    <script src="/theme_js/hoe.js"></script>
+    <script type="text/javascript">
+        function home() {
+            window.location.href = "/branch/home";
+        };
+    </script>
+    <link rel="stylesheet" href="/css/loading-bar.css">
+    <link rel="stylesheet" href="/css/hotkeys.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/bootstrap/font-awesome.min.css"/>
+    <link href="/images/pos_favicon.png" rel="icon">
+    <link rel="stylesheet" href="/theme_css/hoe.css"/>
+
+</head>
+
+<body hoe-navigation-type="vertical" hoe-nav-placement="left" theme-layout="wide-layout" theme-bg="bg1">
+<div style="background-color:white" id="hoeapp-wrapper" class="hoe-hide-lpanel tdn" hoe-device-type="desktop">
+    <header id="hoe-header" hoe-lpanel-effect="shrink">
+        <div class="hoe-left-header" hoe-position-type="fixed">
+            <a class="pull-left" href="#"><img onclick="home()" src="/images/pos.png" width="45" height="45"
+                                               alt="Logo"/>
+                <span>Printtex</span></a>
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+        </div>
+        <div class="hoe-right-header" hoe-position-type="fixed">
+            <span class="hoe-sidebar-toggle"><a href="#"></a></span>
+            <ul class="left-navbar">
+                <li class="hoe-rheader-submenu">
+                    <a href="#"><i style="font-size:22px" onclick="home()" class="fa fa-home hand"
+                                   aria-hidden="true"></i> </a>
+                </li>
+
+            </ul>
+            <ul class="right-navbar"> <!-- Right User Information -->
+                <li class="dropdown hoe-rheader-submenu hoe-header-profile">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span><img class="img-circle" src="/images/user.png"></span>
+                        <span>  <i class=" fa fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu ">
+                        <li><a href='/logout'><i class="fa fa-power-off"></i>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div style="height: 3px; margin-top:48px;
+                         background:white;"></div>
+        </div>
+    </header>
+    <div id="hoeapp-container" hoe-color-type="lpanel-bg2" hoe-lpanel-effect="shrink">
+        <aside th:replace="fragments/branch_aside_extended :: aside"></aside>
+
+
+        <div class="container">
+            <div class="form-group">
+                <center><h2 class="centre" style="margin-left: 300px;">All Company</h2></center>
+
+            </div>
+            <hr>
+            <center><p th:inline="text">[[${result}]]</p></center>
+            <div th:if="${not #lists.isEmpty(companies)}">
+                <table class="display table table-bordered table-striped table-hover">
+                    <tr>
+                        <th>Id</th>
+                        <th>Company Name</th>
+                        <td>Address</td>
+                        <th>Company Logo</th>
+                        <th>Company Name Logo</th>
+                        <!--<th>Action</th>-->
+                    </tr>
+                    <tr th:each="company, iterator : ${companies}">
+                        <td th:text="${iterator.index + 1}"></td>
+                        <td th:text="${company.companyName}"></td>
+                        <td th:text="${company.companyAddress}"></td>
+                        <td><img th:src="@{'/images/companyimages/' + ${company.companyLogoUrl}}" alt="logo"
+                                 th:width="80" th:height="80"/></td>
+                        <td><img th:src="@{'/images/companyimages/' + ${company.companyNameLogoUrl}}" alt="logo"
+                                 th:width="400" th:height="80"/></td>
+                        <!--<td><a th:href="@{'/admin/company/edit/id/'+${company.companyId}}" class="btn btn-success" >Edit</a></td>-->
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="/kha/custom.css"/>
+</body>
+</html>

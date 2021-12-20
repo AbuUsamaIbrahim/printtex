@@ -1,0 +1,22 @@
+body {
+    background-color: #eee;
+}
+
+img.dataTableExample {
+    width: 100%;
+    padding-left: 0%;
+}
+
+div.dataTables_wrapper {
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}

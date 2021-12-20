@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="test_report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20"
+              rightMargin="20" topMargin="20" bottomMargin="20" uuid="3761f45c-0b6f-479d-8b27-cf779bedee59">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="branch_id" class="java.lang.Integer">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+        <defaultValueExpression>
+            <![CDATA["D:\\Project\\printtex\\src\\main\\resources\\reports\\"]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[select * from bill b where b.bill_id=$P{branch_id}]]>
+    </queryString>
+    <field name="bill_id" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="bill_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="billing_date" class="java.sql.Date">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="new_due_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="paid_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="previous_due_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="total_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="total_payable_amount" class="java.lang.Double">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="total_quantity" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="company_id" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="customer_id" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="salesperson_id" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="payment_date" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="branch_id" class="java.lang.Long">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="user_id" class="java.lang.Long">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <group name="page1" isStartNewPage="true">
+        <groupHeader>
+            <band height="709">
+                <subreport>
+                    <reportElement x="0" y="12" width="539" height="181" uuid="41c46e74-5b7e-4416-abe3-63051fe6c9a5"/>
+                    <subreportParameter name="branch_id">
+                        <subreportParameterExpression><![CDATA[$P{branch_id}]]></subreportParameterExpression>
+                    </subreportParameter>
+                    <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    <subreportExpression>
+                        <![CDATA[$P{SUBREPORT_DIR} + "challan_subreport1_office_copy.jasper"]]></subreportExpression>
+                </subreport>
+            </band>
+        </groupHeader>
+    </group>
+    <group name="page2" isStartNewPage="true">
+        <groupHeader>
+            <band height="709"/>
+        </groupHeader>
+    </group>
+    <group name="page3" isStartNewPage="true">
+        <groupHeader>
+            <band height="709"/>
+        </groupHeader>
+    </group>
+    <group name="page4" isStartNewPage="true">
+        <groupHeader>
+            <band height="709"/>
+        </groupHeader>
+    </group>
+</jasperReport>

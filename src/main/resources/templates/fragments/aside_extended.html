@@ -1,0 +1,123 @@
+<aside id="hoe-left-panel" hoe-position-type="fixed">
+    <div class="profile-box">
+        <div class="media">
+            <a class="pull-left" href="user-profile.html">
+                <img class="img-circle" src="/images/user.png"/>
+            </a>
+            <div class="media-body">
+                <h5 class="media-heading">Welcome <br> <span th:utext="${userName}"></span></h5>
+            </div>
+        </div>
+    </div>
+    <ul class="nav panel-list">
+        <li class="active">
+            <a href="/admin/item/stock">
+                <i class="fa fa-tachometer"></i>
+                <span class="menu-text">Stock Management</span>
+                <span class="selected"></span>
+            </a>
+        </li>
+        <li class="hoe-has-menu">
+            <a href="javascript:void(0)">
+                <i class="fa fa-money"></i>
+                <span class="menu-text">Sale</span>
+                <span class="selected"></span>
+            </a>
+            <ul class="hoe-sub-menu">
+                <li>
+                    <a href="/admin/sale">
+                        <span class="menu-text"> Sale Management </span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/allcustomer/due">
+                        <span class="menu-text"> Paid Previous Due </span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="hoe-has-menu">
+            <a href="javascript:void(0)">
+                <i class="fa fa-files-o"></i>
+                <span class="menu-text">Reports</span>
+                <span class="selected"></span>
+            </a>
+            <ul class="hoe-sub-menu">
+                <li>
+                    <a href="/admin/report/today">
+                        <span class="menu-text"> Today's Sale</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/report/total">
+                        <span class="menu-text"> Total Sale</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/admin/report/by_date">
+                        <span class="menu-text"> Report By Date</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/report/by_customer">
+                        <span class="menu-text"> Report By Customer</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/report/by_salesperson">
+                        <span class="menu-text"> Report By Salesperson</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="hoe-has-menu">
+            <a href="javascript:void(0)">
+                <i class="fa fa-cogs"></i>
+                <span class="menu-text">Setup</span>
+                <span class="selected"></span>
+            </a>
+            <ul class="hoe-sub-menu">
+                <li>
+                    <a href="/admin/addcompany">
+                        <span class="menu-text"> Add Company </span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/addcustomer">
+                        <span class="menu-text"> Add Customer </span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/addsalesperson">
+                        <span class="menu-text"> Add Salesperson </span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/addcategory">
+                        <span class="menu-text"> Create Category</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/additem">
+                        <span class="menu-text"> Create Item </span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</aside>
